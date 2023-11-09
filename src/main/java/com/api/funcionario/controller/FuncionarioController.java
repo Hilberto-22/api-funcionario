@@ -28,6 +28,11 @@ public class FuncionarioController {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
+	@GetMapping("/form") 
+	public String form() {
+		return "Bem vindo";
+	}
+	
 	@GetMapping("/list")
 	public List<Funcionario> getAllFuncionario(){
 		 return funcionarioRepository.findAllByOrderByIdAsc();
