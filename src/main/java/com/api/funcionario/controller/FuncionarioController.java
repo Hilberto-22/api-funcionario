@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.funcionario.exception.ResourceNotFoundException;
+import com.api.funcionario.model.EntityNotFoundException;
 import com.api.funcionario.model.Funcionario;
 import com.api.funcionario.repository.FuncionarioRepository;
 
@@ -40,7 +41,7 @@ public class FuncionarioController {
 	
 	@GetMapping("/get/{id}")
 	public ResponseEntity<Funcionario> getFuncionarioById(@PathVariable(value = "id") Long id) throws Exception {
-		Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado"));
+		Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado"));
 		return ResponseEntity.ok().body(funcionario);
 	}
 	
