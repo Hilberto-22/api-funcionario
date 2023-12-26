@@ -34,23 +34,23 @@ public class FuncionarioController {
 		return "Bem vindo";
 	}
 	
-	@GetMapping("/list")
+	@GetMapping
 	public List<Funcionario> getAllFuncionario(){
 		 return funcionarioRepository.findAllByOrderByIdAsc();
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Funcionario> getFuncionarioById(@PathVariable(value = "id") Long id) throws Exception {
 		Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado"));
 		return ResponseEntity.ok().body(funcionario);
 	}
 	
-	@PostMapping("/save")
+	@PostMapping
 	public Funcionario createFuncionario(@Valid @RequestBody Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Funcionario> updateFuncionario(@PathVariable(value = "id") Long id, @Valid 
 			@RequestBody Funcionario funcDetails) throws ResourceNotFoundException{
 		Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> 
@@ -62,7 +62,7 @@ public class FuncionarioController {
 		return ResponseEntity.ok(updateFuncionario);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public Map<String,Boolean> deleteFuncionario(@PathVariable(value = "id") Long funcionarioId){
 		Funcionario funcionario = funcionarioRepository.findById(funcionarioId).orElseThrow(() -> 
 				new ResourceNotFoundException("Funcionario não encontrado"));
